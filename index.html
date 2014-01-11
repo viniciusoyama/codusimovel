@@ -5,10 +5,18 @@
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="app.css" rel="stylesheet">
     <script src="app.js"></script>
   </head>
   <body ng-controller="PropertiesController">
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">Codus Im&oacute;veis</a>
+        </div>
+      </div>
+    </div>
     <div id="messagesDiv">
       <div ng-repeat="msg in messages"><em>{{msg.from}}</em>: {{msg.body}}</div>
     </div>

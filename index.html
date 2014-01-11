@@ -6,6 +6,7 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="app.js"></script>
   </head>
   <body ng-controller="MyController">
     <div id="messagesDiv">
@@ -13,17 +14,6 @@
     </div>
     <input type="text" ng-model="name" placeholder="Name">
     <input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
-    <script>
-      var app = angular.module("myapp", ["firebase"]);
-      function MyController($scope, $firebase) {
-        var ref = new Firebase("https://o9erfo5d1y6.firebaseio-demo.com/");
-        $scope.messages = $firebase(ref);
-        $scope.addMessage = function(e) {
-          if (e.keyCode != 13) return;
-          $scope.messages.$add({from: $scope.name, body: $scope.msg});
-          $scope.msg = "";
-        }
-      }
-    </script>
+
   </body>
 </html>

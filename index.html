@@ -23,7 +23,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-xs-9">
+        <div class="col-md-9">
           <!-- Property CRUD -->
           <div class="well">
             <legend ng-hide="newProperty.$id">Adicionar im&oacute;vel</legend>
@@ -55,15 +55,16 @@
                   <input type="text" class="form-control" ng-model="newProperty.contact.phone"/>
 
                 </div>
+
+              </div> <!-- float left -->
+
+              <div style="float: left; margin-left: 5%; width: 29%;">
                 <div class="form-group">
                   <label class="control-label">Status</label>
                   <select class="form-control" ng-model="newProperty.statusId">
                     <option ng-repeat="(id, propertyStatus) in propertyStatuses" value="{{id}}">{{propertyStatus.name}}</option>
                   </select>
                 </div>
-              </div> <!-- float left -->
-
-              <div style="float: left; margin-left: 5%; width: 29%;">
                 <div class="form-group">
                   <label class="control-label">Tamanho</label>
                   <input type="text" class="form-control" only-number ng-model="newProperty.size"/>
@@ -108,9 +109,9 @@
               <div class="clearfix"></div>
             </form>
           </div> <!-- well -->
-        </div> <!-- col-xs-9 -->
+        </div> <!-- col-md-9 -->
         <!-- Property CRUD END -->
-        <div class="col-xs-3">
+        <div class="col-md-3">
 
           <!-- STATUS CRUD -->
           <div class="panel panel-primary">
@@ -140,10 +141,10 @@
               </ul>
             </div> <!-- panel body -->
           </div> <!-- panel -->
-        </div> <!-- col-xs-9 -->
+        </div> <!-- col-md-9 -->
       </div> <!-- row -->
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <!-- Property list  -->
           <div ng-repeat="(propertyStatusId, propertyStatus) in propertyStatuses">
             <h3>{{propertyStatus.name}}</h3>
@@ -188,7 +189,7 @@
               </tbody>
             </table>
           </div> <!-- ng-repeat propertyStatuses -->
-        </div> <!-- col-xs-12 -->
+        </div> <!-- col-md-12 -->
       </div> <!-- row -->
     </div> <!-- container -->
   </body>

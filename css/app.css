@@ -38,6 +38,6 @@ ul {
   background: white;
 }
 
-th {
+.cursor-pointer {
   cursor: pointer;
 }

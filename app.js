@@ -12,8 +12,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase" , function($scope
       return;
     }
     $scope.propertyStatuses.$add({
-      name: newPropertyStatusName,
-      completed: false
+      name: newPropertyStatusName
     });
     $scope.newPropertyStatusName = '';
   };

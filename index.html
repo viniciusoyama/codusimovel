@@ -13,7 +13,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="#" class="navbar-brand">Codus Im&oacute;veis</a>
+          <span class="navbar-brand">Codus Im&oacute;veis</span>
         </div>
       </div>
     </div>
@@ -43,15 +43,13 @@
                   <label class="col-lg-2 control-label">
                     <button class="btn btn-xs btn-danger" ng-click="removePropertyStatus(id)">X</button>
                   </label>
-
-
                 </li>
               </ul>
             </div>
           </div>
         </div>
         <div class="col-xs-9">
-          <div ng-repeat="propertyStatus in propertyStatuses">
+          <div ng-repeat="(id, propertyStatus) in propertyStatuses">
             <h2>{{propertyStatus}}</h2>
             <table>
               <thead>

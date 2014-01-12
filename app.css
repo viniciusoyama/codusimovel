@@ -1,6 +1,12 @@
+@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 body {
   padding-top: 100px;
   background: #eaeaea url('bg.png');
+}
+
+i {
+  cursor: pointer;
 }
 
 .statuses-list li{
@@ -10,4 +16,14 @@ body {
 ul {
   list-style: none;
   padding: 0;
+}
+
+.statuses-list .input-group {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.table-striped th,
+.table-striped td {
+  background: white;
 }

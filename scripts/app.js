@@ -20,12 +20,30 @@ app.directive('onlyNumber', function() {
   };
 });
 
+app.filter('statusFilter', [function () {
+  return function (properties, selectedStatus) {
+    if (!angular.isUndefined(properties) && !angular.isUndefined(selectedStatus) && properties.length > 0) {
+      var tempProperties = [];
+
+      angular.forEach(properties, function (property) {
+        if (property.status && property.status.name == selectedStatus.name) {
+          tempProperties.push(property);
+        }
+      });
+
+      return tempProperties;
+    } else {
+      return properties;
+    }
+  };
+}]);
+
 app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , function($scope, $firebase, $window) {
   var propertiesRef = new Firebase("https://1389469963926.firebaseio.com/propeties");
   var propertyStatuesRef = new Firebase("https://1389469963926.firebaseio.com/propertyStatuses");
   $scope.properties = $firebase(propertiesRef);
   $scope.propertyStatuses = $firebase(propertyStatuesRef);
-  $scope.newProperty = { status: ''};
+  $scope.newProperty = {};
   $scope.orderPredicate = 'size';
   $scope.orderReverse = false;
 
@@ -34,7 +52,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
 
     keys.forEach(function(key, i) {
       if (i == 0) {
-        $scope.newProperty = {status: $scope.propertyStatuses[key].name};
+        $scope.newProperty = {status: $scope.propertyStatuses[key]};
       }
     });
   }
@@ -54,7 +72,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
     var statusName = $scope.propertyStatuses[id].name;
     var propertiesKeys = $scope.properties.$getIndex();
     var existsPropertyWithStatus = propertiesKeys.reduce(function(memo, key) {
-      return (memo || ($scope.properties[key].status == statusName));
+      return (memo || ($scope.properties[key].statusId == id));
     }, false);
     if (existsPropertyWithStatus) {
       alert("Nao e possivel efetuar a remoção pois existem imoveis com este status.");

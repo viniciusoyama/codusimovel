@@ -153,11 +153,11 @@
                 <th class="center" style="width: 30%;">Info</th>
                 <th class="center" style="width: 20%;">Local</th>
                 <th class="center cursor-pointer" style="width: 5%;" ng-click="orderPredicate='size'; orderReverse=!orderReverse;">M2</th>
-                <th class="center cursor-pointer" style="width: 5%;" ng-click="orderPredicate='rent'; orderReverse=!orderReverse;">Aluguel</th>
-                <th class="center cursor-pointer" style="width: 5%;" ng-click="orderPredicate='condominium'; orderReverse=!orderReverse;">Cond.</th>
-                <th class="center cursor-pointer" style="width: 5%;" ng-click="orderPredicate='iptu'; orderReverse=!orderReverse;">IPTU</th>
+                <th class="center hidden-xs hidden-sm cursor-pointer" style="width: 5%;" ng-click="orderPredicate='rent'; orderReverse=!orderReverse;">Aluguel</th>
+                <th class="center hidden-xs hidden-sm cursor-pointer" style="width: 5%;" ng-click="orderPredicate='condominium'; orderReverse=!orderReverse;">Cond.</th>
+                <th class="center hidden-xs hidden-sm cursor-pointer" style="width: 5%;" ng-click="orderPredicate='iptu'; orderReverse=!orderReverse;">IPTU</th>
                 <th class="center cursor-pointer" style="width: 5%;" ng-click="orderPredicate='total'; orderReverse=!orderReverse;">Total</th>
-                <th class="center cursor-pointer" style="width: 5%;" ng-click="orderPredicate='totalPerM2'; orderReverse=!orderReverse;">R$/2</th>
+                <th class="center hidden-xs hidden-sm cursor-pointer" style="width: 5%;" ng-click="orderPredicate='totalPerM2'; orderReverse=!orderReverse;">R$/2</th>
                 <th class="center" style="width: 10%;">A&ccedil;&otilde;es</th>
               </thead>
               <tbody>
@@ -172,11 +172,11 @@
                   </td>
                   <td class="center">{{property.address}}</td>
                   <td class="center">{{property.size}}</td>
-                  <td class="center">{{property.rent}}</td>
-                  <td class="center">{{property.condominium}}</td>
-                  <td class="center">{{property.iptu}}</td>
+                  <td class="center hidden-xs hidden-sm">{{property.rent}}</td>
+                  <td class="center hidden-xs hidden-sm">{{property.condominium}}</td>
+                  <td class="center hidden-xs hidden-sm">{{property.iptu}}</td>
                   <td class="center">{{property.total}}</td>
-                  <td class="center">{{property.totalPerM2}}</td>
+                  <td class="center hidden-xs hidden-sm">{{property.totalPerM2}}</td>
                   <td class="center">
                     <i class="glyphicon glyphicon-trash red" ng-click="removeProperty(property.$id)"></i>
                     <i class="glyphicon glyphicon-edit yellow" ng-click="editProperty(property.$id)"></i>

@@ -20,6 +20,13 @@ app.directive('onlyNumber', function() {
   };
 });
 
+app.filter('nl2p', function () {
+  return function(text){
+    text = String(text).trim();
+    return (text.length > 0 ? '<p>' + text.replace(/[\r\n]+/, '</p><p>') + '</p>' : null);
+  }
+});
+
 app.filter('statusFilter', [function () {
   return function (properties, selectedStatus) {
     if (!angular.isUndefined(properties) && !angular.isUndefined(selectedStatus) && properties.length > 0) {
@@ -105,6 +112,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   $scope.editProperty = function(id) {
     $scope.newProperty = $scope.properties.$child(id);
     $scope.newProperty.$id = id;
+    $("html, body").animate({ scrollTop: "0px" });
   }
 
   function formatPropertyToBeSaved(property) {

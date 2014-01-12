@@ -91,16 +91,18 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   };
 
   $scope.addProperty = function() {
-
-    $scope.properties.$add(formatPropertyToBeSaved($scope.newProperty));
-    $scope.resetPropertyForm();
+    if (propertyValid($scope.newProperty)) {
+      $scope.properties.$add(formatPropertyToBeSaved($scope.newProperty));
+      $scope.resetPropertyForm();
+    }
   };
 
   $scope.updateProperty = function() {
-
-    $scope.properties[$scope.newProperty.$id] = formatPropertyToBeSaved($scope.newProperty);
-    $scope.properties.$save($scope.newProperty.$id);
-    $scope.resetPropertyForm();
+    if (propertyValid($scope.newProperty)) {
+      $scope.properties[$scope.newProperty.$id] = formatPropertyToBeSaved($scope.newProperty);
+      $scope.properties.$save($scope.newProperty.$id);
+      $scope.resetPropertyForm();
+    }
   };
 
   $scope.removeProperty = function(id) {
@@ -123,6 +125,10 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
 
     property.totalPerM2 = parseFloat((property.total/parseFloat(property.size)).toFixed(2));
     return property;
+  }
+
+  function propertyValid(property) {
+    return !!property.statusId;
   }
 
 

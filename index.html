@@ -54,7 +54,7 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">OBS</label>
-                  <textarea type="text" rows="5" class="form-control" only-number only-number-float ng-model="newProperty.notes">
+                  <textarea type="text" rows="5" class="form-control" ng-model="newProperty.notes">
                   </textarea>
                 </div>
               </div> <!-- float left -->
@@ -62,29 +62,30 @@
                 <div class="form-group">
                   <label class="control-label">Aluguel</label>
                   <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                    <span class="input-group-addon">R$</span>
                     <input type="text" class="form-control" only-number only-number-float ng-model="newProperty.rent"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Condominio</label>
                   <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                    <span class="input-group-addon">R$</span>
                     <input type="text" class="form-control" only-number only-number-float ng-model="newProperty.condominium"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label">IPTU</label>
                   <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                    <span class="input-group-addon">R$</span>
                     <input type="text" class="form-control" only-number only-number-float ng-model="newProperty.iptu"/>
                   </div>
 
                 </div>
                 <div class="form-group">
                   <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn pull-right btn-primary" ng-click="addProperty()">Salvar</button>
-                    <button class="btn btn-default pull-right" style="margin-right: 10px">Cancelar</button>
+                    <button type="submit" class="btn pull-right btn-primary" ng-hide="idToUpdate" ng-click="addProperty()">Salvar</button>
+                    <button type="submit" class="btn pull-right btn-primary" ng-show="idToUpdate" ng-click="updateProperty()">Salvar</button>
+                    <button class="btn btn-default pull-right" style="margin-right: 10px" ng-click="resetPropertyForm()">Cancelar</button>
                     <div class="clearfix"></div>
                   </div>
                 </div>
@@ -133,29 +134,33 @@
             <h3>{{propertyStatus.name}}</h3>
             <table class="table table-striped table-bordered">
               <thead>
-                <th>Site</th>
-                <th>Local</th>
-                <th>Tamanho(m2)</th>
-                <th>Aluguel</th>
-                <th>Condominio</th>
-                <th>IPTU</th>
-                <th>Total</th>
-                <th>Preco m2</th>
-                <td>OBS</th>
-                <th>A&ccedil;&otilde;es</th>
+                <th class="center" style="width: 30%;">OBS</th>
+                <th class="center" style="width: 20%;">Local</th>
+                <th class="center" style="width: 5%;">M2</th>
+                <th class="center" style="width: 5%;">Aluguel</th>
+                <th class="center" style="width: 5%;">Cond.</th>
+                <th class="center" style="width: 5%;">IPTU</th>
+                <th class="center" style="width: 5%;">Total</th>
+                <th class="center" style="width: 5%;">R$/2</th>
+                <th class="center" style="width: 10%;">A&ccedil;&otilde;es</th>
               </thead>
               <tbody>
                 <tr ng-repeat="(id, property) in properties">
-                  <td>{{property.url}}</td>
-                  <td>{{property.address}}</td>
-                  <td>{{property.size}}</td>
-                  <td>{{property.rent}}</td>
-                  <td>{{property.condominium}}</td>
-                  <td>{{property.iptu}}</td>
-                  <td>{{property.total}}</td>
-                  <td>{{property.totalPerM2}}</td>
-                  <td>{{property.notes}}</td>
-                  <td><i class="glyphicon glyphicon-trash" ng-click="removeProperty(id)" /></td>
+                  <td class="center">{{property.notes}}</td>
+                  <td class="center">{{property.address}}</td>
+                  <td class="center">{{property.size}}</td>
+                  <td class="center">{{property.rent}}</td>
+                  <td class="center">{{property.condominium}}</td>
+                  <td class="center">{{property.iptu}}</td>
+                  <td class="center">{{property.total}}</td>
+                  <td class="center">{{property.totalPerM2}}</td>
+                  <td class="center">
+                    <i class="glyphicon glyphicon-trash red" ng-click="removeProperty(id)"></i>
+                    <i class="glyphicon glyphicon-edit yellow" ng-click="editProperty(id)"></i>
+                    <a ng-href="{{property.url}}" target="_blank">
+                      <i class="glyphicon glyphicon-globe"></i>
+                    </a>
+                  </td>
                 </tr>
               </tbody>
             </table>

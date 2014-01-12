@@ -26,8 +26,9 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   $scope.properties = $firebase(propertiesRef);
   $scope.propertyStatuses = $firebase(propertyStatuesRef);
   $scope.newProperty = { status: ''};
+  $scope.idToUpdate = false;
 
-  function resetNewProperty() {
+  $scope.resetPropertyForm = function() {
     var keys = $scope.propertyStatuses.$getIndex();
 
     keys.forEach(function(key, i) {
@@ -35,6 +36,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
         $scope.newProperty = {status: $scope.propertyStatuses.$child(key).name};
       }
     });
+    $scope.idToUpdate = false;
   }
 
   $scope.addPropertyStatus = function() {
@@ -55,7 +57,14 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   $scope.addProperty = function() {
 
     $scope.properties.$add(formatPropertyToBeSaved($scope.newProperty));
-    resetNewProperty();
+    $scope.resetPropertyForm();
+  };
+
+  $scope.updateProperty = function() {
+
+    $scope.properties[$scope.idToUpdate] = formatPropertyToBeSaved($scope.newProperty);
+    $scope.properties.$save($scope.idToUpdate);
+    $scope.resetPropertyForm();
   };
 
   $scope.removeProperty = function(id) {
@@ -64,13 +73,18 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
     }
   };
 
-  function formatPropertyToBeSaved(property) {
-    property.rent = parseFloat(property.rent);
-    property.condominium = parseFloat(property.condominium);
-    property.iptu = parseFloat(property.iptu);
-    property.total = property.rent + property.condominium + property.iptu;
+  $scope.editProperty = function(id) {
+    $scope.newProperty = $scope.properties.$child(id);
+    $scope.idToUpdate = id;
+  }
 
-    property.totalPerM2 = property.total/parseFloat(property.size);
+  function formatPropertyToBeSaved(property) {
+    property.rent = parseFloat(parseFloat(property.rent).toFixed(2));
+    property.condominium = parseFloat(parseFloat(property.condominium).toFixed(2));
+    property.iptu = parseFloat(parseFloat(property.iptu).toFixed(2));
+    property.total = parseFloat((property.rent + property.condominium + property.iptu).toFixed(2));
+
+    property.totalPerM2 = parseFloat((property.total/parseFloat(property.size)).toFixed(2));
     return property;
   }
 

@@ -5,6 +5,16 @@ body {
   background: #eaeaea url('../img/bg.png');
 }
 
+.center {
+  text-align: center;
+}
+.yellow {
+  color: #f39c12;
+}
+
+.red {
+  color: #e74c3c;
+}
 i {
   cursor: pointer;
 }

@@ -75,9 +75,10 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
       return (memo || ($scope.properties[key].statusId == id));
     }, false);
     if (existsPropertyWithStatus) {
-      alert("Nao e possivel efetuar a remoção pois existem imoveis com este status.");
+      alert("Não é possível efetuar a remoção pois existem imóveis com este status.");
       return;
     }
+    return;
 
     $scope.propertyStatuses.$remove(id);
   };
@@ -96,7 +97,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   };
 
   $scope.removeProperty = function(id) {
-    if ($window.confirm("Confirma a remocao?")) {
+    if ($window.confirm("Confirma a remoção?")) {
       $scope.properties.$remove(id);
     }
   };

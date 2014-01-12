@@ -24,7 +24,8 @@
         <div class="col-xs-9">
           <!-- Property CRUD -->
           <div class="well">
-            <legend>Adicionar im&oacute;vel</legend>
+            <legend ng-hide="newProperty.$id">Adicionar im&oacute;vel</legend>
+            <legend ng-show="newProperty.$id">Editar im&oacute;vel</legend>
             <form class="form-horizontal">
               <div style="float: left; width: 29%;">
                 <div class="form-group">
@@ -83,7 +84,7 @@
                 </div>
                 <div class="form-group">
 
-                  <button type="submit" class="btn pull-right btn-primary" ng-show="!newProperty.$id" ng-click="addProperty()">Adicionar</button>
+                  <button type="submit" class="btn pull-right btn-primary" ng-hide="newProperty.$id" ng-click="addProperty()">Adicionar</button>
                   <button type="submit" class="btn pull-right btn-primary" ng-show="newProperty.$id" ng-click="updateProperty()">Salvar</button>
                   <button class="btn btn-default pull-right" style="margin-right: 10px" ng-click="resetPropertyForm()">Cancelar</button>
                   <div class="clearfix"></div>

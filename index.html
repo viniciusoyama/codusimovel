@@ -50,11 +50,11 @@
               <div style="float: left; margin-left: 5%; width: 29%;">
                 <div class="form-group">
                   <label class="control-label">Tamanho</label>
-                  <input type="text" class="form-control" ng-model="newProperty.size"/>
+                  <input type="text" class="form-control" only-number ng-model="newProperty.size"/>
                 </div>
                 <div class="form-group">
                   <label class="control-label">OBS</label>
-                  <textarea type="text" rows="5" class="form-control" ng-model="newProperty.notes">
+                  <textarea type="text" rows="5" class="form-control" only-number only-number-float ng-model="newProperty.notes">
                   </textarea>
                 </div>
               </div> <!-- float left -->
@@ -63,21 +63,21 @@
                   <label class="control-label">Aluguel</label>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control" ng-model="newProperty.rent"/>
+                    <input type="text" class="form-control" only-number only-number-float ng-model="newProperty.rent"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Condominio</label>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control" ng-model="newProperty.condominium"/>
+                    <input type="text" class="form-control" only-number only-number-float ng-model="newProperty.condominium"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label">IPTU</label>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="text" class="form-control" ng-model="newProperty.iptu"/>
+                    <input type="text" class="form-control" only-number only-number-float ng-model="newProperty.iptu"/>
                   </div>
 
                 </div>

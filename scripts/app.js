@@ -1,5 +1,25 @@
 var app = angular.module("CodusApp", ["firebase"]);
 
+app.directive('onlyNumber', function() {
+  return function(scope, element, attrs) {
+    var keyCode = [8,9,37,39,48,49,50,51,52,53,54,55,56,57,96,97,98,99,100,101,102,103,104,105,110];
+
+    if (attrs.hasOwnProperty("onlyNumberFloat")) {
+      keyCode.push(190);
+    }
+
+    element.bind("keydown", function(event) {
+      if($.inArray(event.which,keyCode) == -1) {
+          scope.$apply(function(){
+              scope.$eval(attrs.onlyNum);
+              event.preventDefault();
+          });
+          event.preventDefault();
+      }
+    });
+  };
+});
+
 app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , function($scope, $firebase, $window) {
   var propertiesRef = new Firebase("https://1389469963926.firebaseio.com/propeties");
   var propertyStatuesRef = new Firebase("https://1389469963926.firebaseio.com/propertyStatuses");

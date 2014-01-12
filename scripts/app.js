@@ -26,17 +26,17 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   $scope.properties = $firebase(propertiesRef);
   $scope.propertyStatuses = $firebase(propertyStatuesRef);
   $scope.newProperty = { status: ''};
-  $scope.idToUpdate = false;
+  $scope.orderPredicate = 'size';
+  $scope.orderReverse = false;
 
   $scope.resetPropertyForm = function() {
     var keys = $scope.propertyStatuses.$getIndex();
 
     keys.forEach(function(key, i) {
       if (i == 0) {
-        $scope.newProperty = {status: $scope.propertyStatuses.$child(key).name};
+        $scope.newProperty = {status: $scope.propertyStatuses[key].name};
       }
     });
-    $scope.idToUpdate = false;
   }
 
   $scope.addPropertyStatus = function() {
@@ -51,6 +51,16 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
   };
 
   $scope.removePropertyStatus = function(id) {
+    var statusName = $scope.propertyStatuses[id].name;
+    var propertiesKeys = $scope.properties.$getIndex();
+    var existsPropertyWithStatus = propertiesKeys.reduce(function(memo, key) {
+      return (memo || ($scope.properties[key].status == statusName));
+    }, false);
+    if (existsPropertyWithStatus) {
+      alert("Nao e possivel efetuar a remoção pois existem imoveis com este status.");
+      return;
+    }
+
     $scope.propertyStatuses.$remove(id);
   };
 
@@ -62,8 +72,8 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
 
   $scope.updateProperty = function() {
 
-    $scope.properties[$scope.idToUpdate] = formatPropertyToBeSaved($scope.newProperty);
-    $scope.properties.$save($scope.idToUpdate);
+    $scope.properties[$scope.newProperty.$id] = formatPropertyToBeSaved($scope.newProperty);
+    $scope.properties.$save($scope.newProperty.$id);
     $scope.resetPropertyForm();
   };
 
@@ -75,7 +85,7 @@ app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , func
 
   $scope.editProperty = function(id) {
     $scope.newProperty = $scope.properties.$child(id);
-    $scope.idToUpdate = id;
+    $scope.newProperty.$id = id;
   }
 
   function formatPropertyToBeSaved(property) {

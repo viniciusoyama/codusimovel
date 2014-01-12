@@ -82,12 +82,11 @@
 
                 </div>
                 <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn pull-right btn-primary" ng-hide="idToUpdate" ng-click="addProperty()">Salvar</button>
-                    <button type="submit" class="btn pull-right btn-primary" ng-show="idToUpdate" ng-click="updateProperty()">Salvar</button>
-                    <button class="btn btn-default pull-right" style="margin-right: 10px" ng-click="resetPropertyForm()">Cancelar</button>
-                    <div class="clearfix"></div>
-                  </div>
+
+                  <button type="submit" class="btn pull-right btn-primary" ng-show="!newProperty.$id" ng-click="addProperty()">Adicionar</button>
+                  <button type="submit" class="btn pull-right btn-primary" ng-show="newProperty.$id" ng-click="updateProperty()">Salvar</button>
+                  <button class="btn btn-default pull-right" style="margin-right: 10px" ng-click="resetPropertyForm()">Cancelar</button>
+                  <div class="clearfix"></div>
                 </div>
               </div> <!-- float right -->
               <div class="clearfix"></div>
@@ -134,18 +133,18 @@
             <h3>{{propertyStatus.name}}</h3>
             <table class="table table-striped table-bordered">
               <thead>
-                <th class="center" style="width: 30%;">OBS</th>
-                <th class="center" style="width: 20%;">Local</th>
-                <th class="center" style="width: 5%;">M2</th>
-                <th class="center" style="width: 5%;">Aluguel</th>
-                <th class="center" style="width: 5%;">Cond.</th>
-                <th class="center" style="width: 5%;">IPTU</th>
-                <th class="center" style="width: 5%;">Total</th>
-                <th class="center" style="width: 5%;">R$/2</th>
+                <th class="center" style="width: 30%;" ng-click="orderPredicate='notes'; orderReverse=!orderReverse;">OBS</th>
+                <th class="center" style="width: 20%;" ng-click="orderPredicate='Local'; orderReverse=!orderReverse;">Local</th>
+                <th class="center" style="width: 5%;" ng-click="orderPredicate='size'; orderReverse=!orderReverse;">M2</th>
+                <th class="center" style="width: 5%;" ng-click="orderPredicate='rent'; orderReverse=!orderReverse;">Aluguel</th>
+                <th class="center" style="width: 5%;" ng-click="orderPredicate='condominium'; orderReverse=!orderReverse;">Cond.</th>
+                <th class="center" style="width: 5%;" ng-click="orderPredicate='iptu'; orderReverse=!orderReverse;">IPTU</th>
+                <th class="center" style="width: 5%;" ng-click="orderPredicate='total'; orderReverse=!orderReverse;">Total</th>
+                <th class="center" style="width: 5%;" ng-click="orderPredicate='totalPerM2'; orderReverse=!orderReverse;">R$/2</th>
                 <th class="center" style="width: 10%;">A&ccedil;&otilde;es</th>
               </thead>
               <tbody>
-                <tr ng-repeat="(id, property) in properties">
+                <tr ng-repeat="property in properties | orderByPriority | orderBy:orderPredicate:orderReverse">
                   <td class="center">{{property.notes}}</td>
                   <td class="center">{{property.address}}</td>
                   <td class="center">{{property.size}}</td>
@@ -155,8 +154,8 @@
                   <td class="center">{{property.total}}</td>
                   <td class="center">{{property.totalPerM2}}</td>
                   <td class="center">
-                    <i class="glyphicon glyphicon-trash red" ng-click="removeProperty(id)"></i>
-                    <i class="glyphicon glyphicon-edit yellow" ng-click="editProperty(id)"></i>
+                    <i class="glyphicon glyphicon-trash red" ng-click="removeProperty(property.$id)"></i>
+                    <i class="glyphicon glyphicon-edit yellow" ng-click="editProperty(property.$id)"></i>
                     <a ng-href="{{property.url}}" target="_blank">
                       <i class="glyphicon glyphicon-globe"></i>
                     </a>

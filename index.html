@@ -161,7 +161,14 @@
               </thead>
               <tbody>
                 <tr ng-repeat="property in properties | orderByPriority | filter: {statusId: propertyStatusId} | orderBy:orderPredicate:orderReverse">
-                  <td class="center"><pre>{{property.notes}}</pre></td>
+                  <td class="">
+                    <pre>{{property.notes}}</pre>
+                    <p ng-show="showMore">
+                      <b>Contato:</b> {{property.contact.name}}
+                      <br>
+                      <b>Telefone:</b> {{property.contact.phone}}
+                    </p>
+                  </td>
                   <td class="center">{{property.address}}</td>
                   <td class="center">{{property.size}}</td>
                   <td class="center">{{property.rent}}</td>
@@ -172,7 +179,8 @@
                   <td class="center">
                     <i class="glyphicon glyphicon-trash red" ng-click="removeProperty(property.$id)"></i>
                     <i class="glyphicon glyphicon-edit yellow" ng-click="editProperty(property.$id)"></i>
-                    <a ng-href="{{property.url}}" target="_blank">
+                    <i class="glyphicon  glyphicon-plus-sign" ng-click="showMore = !showMore"></i>
+                    <a ng-href="{{property.url}}" ng-if="property.url" target="_blank">
                       <i class="glyphicon glyphicon-globe"></i>
                     </a>
                   </td>

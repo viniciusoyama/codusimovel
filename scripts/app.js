@@ -46,8 +46,8 @@ app.filter('statusFilter', [function () {
 }]);
 
 app.controller("PropertiesController", [ "$scope", "$firebase", "$window" , function($scope, $firebase, $window) {
-  var propertiesRef = new Firebase("https://1389469963926.firebaseio.com/propeties");
-  var propertyStatuesRef = new Firebase("https://1389469963926.firebaseio.com/propertyStatuses");
+  var propertiesRef = new Firebase("https://popping-fire-370.firebaseio.com//propeties");
+  var propertyStatuesRef = new Firebase("https://popping-fire-370.firebaseio.com//propertyStatuses");
   $scope.properties = $firebase(propertiesRef);
   $scope.propertyStatuses = $firebase(propertyStatuesRef);
   $scope.newProperty = {};
